@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // Clear loading message
       activitiesList.innerHTML = "";
 
+      // Reset activity select so options don't duplicate on re-render
+      activitySelect.innerHTML = '<option value="">-- Select an activity --</option>';
+
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
         const activityCard = document.createElement("div");
@@ -26,6 +29,33 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
         `;
+
+        // Participants section (bulleted list)
+        const participantsContainer = document.createElement("div");
+        participantsContainer.className = "participants-container";
+
+        const participantsTitle = document.createElement("p");
+        participantsTitle.innerHTML = "<strong>Participants:</strong>";
+        participantsContainer.appendChild(participantsTitle);
+
+        const participantsListEl = document.createElement("ul");
+        participantsListEl.className = "participants";
+
+        if (details.participants.length) {
+          details.participants.forEach((email) => {
+            const li = document.createElement("li");
+            li.textContent = email;
+            participantsListEl.appendChild(li);
+          });
+        } else {
+          const li = document.createElement("li");
+          li.className = "empty";
+          li.textContent = "No participants yet";
+          participantsListEl.appendChild(li);
+        }
+
+        participantsContainer.appendChild(participantsListEl);
+        activityCard.appendChild(participantsContainer);
 
         activitiesList.appendChild(activityCard);
 
