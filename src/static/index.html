@@ -17,7 +17,25 @@
         <h3>Available Activities</h3>
         <div id="activities-list">
           <!-- Activities will be loaded here -->
-          <p>Loading activities...</p>
+          <!-- Small sample/fallback so participants are visible before JS renders live data -->
+          <div class="activity-card sample" aria-hidden="true">
+            <h4>Sample Activity</h4>
+            <p>A preview of how activities and participants will appear.</p>
+            <p><strong>Schedule:</strong> Mondays 3:00–4:00 PM</p>
+            <p><strong>Availability:</strong> 10 spots left</p>
+
+            <div class="participants-container">
+              <p><strong>Participants:</strong></p>
+              <ul class="participants">
+                <li class="empty">No participants yet</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="muted-note">Loading activities…</p>
+          <noscript>
+            <div class="info">JavaScript is required to load live activities and participants.</div>
+          </noscript>
         </div>
       </section>
 
